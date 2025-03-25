@@ -11,15 +11,19 @@ public class Sprite {
     public int getX(){return 1;}
     public int getY(){return 1;}
 
-    public void setX(){}
-    public void setY(){}
+    public void setX(int newX){
+        x = newX;
+    }
+    public void setY(int newY){
+        y = newY;
+    }
 
     public String getCoords(){ //returns the coordinates of the sprite ->"(x,y)"
-        return "";
+        return "(" + x + "," + y + ")";
     }
 
     public String getRowCol(int size){ //returns the row and column of the sprite -> "[row][col]"
-        return "[][]";
+        return "[" + (size - x) + "][" + y + "]";
     }
     
 
