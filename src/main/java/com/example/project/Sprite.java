@@ -8,8 +8,8 @@ public class Sprite {
         this.y = y;
     }
 
-    public int getX(){return 1;}
-    public int getY(){return 1;}
+    public int getX(){return x;}
+    public int getY(){return y;}
 
     public void setX(int newX){
         x = newX;

@@ -12,6 +12,14 @@ public class Player extends Sprite {
         numLives = 2;
     }
 
+    public String getCoords(){ //returns "Player:"+coordinates
+        return "Player:" + super.getCoords();
+    }
+
+
+    public String getRowCol(int size){ //return "Player:"+row col
+        return "Player:" + super.getRowCol(size);
+    }
 
     public int getTreasureCount(){return treasureCount;}
     public int getLives(){return numLives;}
@@ -36,7 +44,8 @@ public class Player extends Sprite {
 
 
     public void interact(int size, String direction, int numTreasures, Object obj) { // interact with an object in the position you are moving to 
-    //numTreasures is the total treasures at the beginning of the game
+        
+        //numTreasures is the total treasures at the beginning of the game
     }
 
 

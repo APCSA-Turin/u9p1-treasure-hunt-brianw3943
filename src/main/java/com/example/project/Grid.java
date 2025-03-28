@@ -22,18 +22,46 @@ public class Grid{
 
 
     public void placeSprite(Sprite s){ //place sprite in new spot
-
+        grid[(size - 1 - s.getY())][s.getX()] = s;
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-
+        Sprite temp;
+        if (direction.equalsIgnoreCase("w")) {
+            temp = grid[(size - 1 - s.getY())][s.getX()];
+            grid[(size - 1 - s.getY())][s.getX()] = s;
+            grid[(size - s.getY())][s.getX()] = temp;
+        }
+        if (direction.equalsIgnoreCase("a")) {
+            temp = grid[(size - 1 - s.getY())][s.getX()];
+            grid[(size - 1 - s.getY())][s.getX()] = s;
+            grid[(size - 1 - s.getY())][s.getX() + 1] = temp;
+        }
+        if (direction.equalsIgnoreCase("s")) {
+            temp = grid[(size - 1 - s.getY())][s.getX()];
+            grid[(size - 1 - s.getY())][s.getX()] = s;
+            grid[(size + 1 - s.getY())][s.getX()] = temp;
+        }
+        if (direction.equalsIgnoreCase("d")) {
+            temp = grid[(size - 1 - s.getY())][s.getX()];
+            grid[(size - 1 - s.getY())][s.getX()] = s;
+            grid[(size - 1 - s.getY())][s.getX() - 1] = temp;
+        }
     }
 
 
     public void display() { //print out the current grid to the screen 
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
-                System.out.print(sprite);
+                if (sprite instanceof Dot) {
+                    System.out.print("#");
+                }
+                if (sprite instanceof Player) {
+                    System.out.print("O");
+                }
+                if (sprite instanceof Enemy) {
+                    System.out.print("X");
+                }
             }
             System.out.println();
         }
