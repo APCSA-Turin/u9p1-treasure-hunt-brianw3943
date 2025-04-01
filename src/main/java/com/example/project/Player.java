@@ -44,7 +44,21 @@ public class Player extends Sprite {
 
 
     public void interact(int size, String direction, int numTreasures, Object obj) { // interact with an object in the position you are moving to 
-        
+        if (obj instanceof Enemy) {
+            numLives--;
+            if (numLives >= 0) {
+                
+            }
+        } else if (obj instanceof Trophy) {
+            if (numTreasures < 2) {
+
+            } else {
+                win = true;
+            }
+        } else if (obj instanceof Treasure) {
+            numTreasures++;
+            obj = new Dot(getX(), getY());
+        }
         //numTreasures is the total treasures at the beginning of the game
     }
 

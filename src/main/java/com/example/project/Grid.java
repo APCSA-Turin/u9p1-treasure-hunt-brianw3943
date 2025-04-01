@@ -28,24 +28,24 @@ public class Grid{
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
         Sprite temp;
         if (direction.equalsIgnoreCase("w")) {
-            temp = grid[(size - 1 - s.getY())][s.getX()];
+            temp = grid[(size - 1 - s.getY())][s.getX()];   
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - s.getY())][s.getX()] = temp;
+            grid[(size - s.getY())][s.getX()] = temp;   //update sprite location to be one y level higher
         }
         if (direction.equalsIgnoreCase("a")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - 1 - s.getY())][s.getX() + 1] = temp;
+            grid[(size - 1 - s.getY())][s.getX() + 1] = temp;   //update sprite location to be one x level lower
         }
         if (direction.equalsIgnoreCase("s")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size + 1 - s.getY())][s.getX()] = temp;
+            grid[(size - 2 - s.getY())][s.getX()] = temp;   ////update sprite location to be one y level lower
         }
         if (direction.equalsIgnoreCase("d")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - 1 - s.getY())][s.getX() - 1] = temp;
+            grid[(size - 1 - s.getY())][s.getX() - 1] = temp;   //update sprite location to be one x level higher
         }
     }
 
@@ -62,12 +62,26 @@ public class Grid{
                 if (sprite instanceof Enemy) {
                     System.out.print("X");
                 }
+                if (sprite instanceof Trophy) {
+                    System.out.println("π");
+                }
             }
             System.out.println();
         }
     }
     
     public void gameover(){ //use this method to display a loss
+        for (Sprite[] sprites : grid) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Dot) {
+                    System.out.print("#");
+                }
+                if (sprite instanceof Player) {
+                    System.out.print("O");
+                }
+            }
+            System.out.println();
+        }
     }
 
     public void win(){ //use this method to display a win 
