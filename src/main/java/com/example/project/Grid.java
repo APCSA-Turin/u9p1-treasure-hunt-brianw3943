@@ -54,18 +54,18 @@ public class Grid{
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
                 if (sprite instanceof Dot) {
-                    System.out.print("#");
+                    System.out.print("⬜");
                 }
                 if (sprite instanceof Player) {
-                    System.out.print("O");
+                    System.out.print("🦄");
                 }
                 if (sprite instanceof Enemy) {
-                    System.out.print("X");
+                    System.out.print("🦂");
                 }
                 if (sprite instanceof Trophy) {
-                    System.out.println("π");
+                    System.out.print("🏆");
                 } else if (sprite instanceof Treasure) {
-                    System.out.println("$");
+                    System.out.print("🌈");
                 }
             }
             System.out.println();
@@ -76,10 +76,7 @@ public class Grid{
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
                 if (sprite instanceof Sprite) {
-                    System.out.print("X");
-                }
-                if (sprite instanceof Player) {
-                    System.out.print("O");
+                    System.out.print("💀");
                 }
             }
             System.out.println();

@@ -10,6 +10,8 @@ public class Game{
     private int size; 
 
     public Game(int size){ //the constructor should call initialize() and play()
+        initialize();
+        play();
     }
 
     public static void clearScreen() { //do not modify
@@ -47,9 +49,46 @@ public class Game{
     }
 
     public void initialize(){
-
+        size = 10;
+        grid = new Grid(size);
+        player = new Player(0, 0);
+        enemies = new Enemy[2];
+        enemies[0] = new Enemy(4, 4);
+        enemies[1] = new Enemy(8, 8);
+        treasures = new Treasure[2];
+        treasures[0] = new Treasure(5, 8);
+        treasures[1] = new Treasure(7, 5);
+        trophy = new Trophy(0, size - 1);
+        grid.placeSprite(player);
+        grid.placeSprite(enemies[0]);
+        grid.placeSprite(enemies[1]);
+        grid.placeSprite(treasures[0]);
+        grid.placeSprite(treasures[1]);
+        grid.placeSprite(trophy);
+        grid.display();
+        System.out.println("Treasure count: " + player.getTreasureCount());
+        System.out.println("Lives: " + player.getLives());
+        while(1 != 0) {
+            Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine();
+            if (player.isValid(size, input)) {
+                player.interact(size, input, 2, enemies[0]);
+                player.move(input);
+                grid.placeSprite(player, input);
+                grid.display();
+                if (player.getLives() <= 0) {
+                    grid.gameover();
+                }
+                if (player.getTreasureCount() == 2) {
+                    grid.win();
+                }
+                System.out.println("Treasure count: " + player.getTreasureCount());
+                System.out.println("Lives: " + player.getLives());
+            } else {
+                System.out.println("Out of bounds");
+            }
+        }
         //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
-   
     }
 
     public static void main(String[] args) {
