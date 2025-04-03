@@ -30,22 +30,22 @@ public class Grid{
         if (direction.equalsIgnoreCase("w")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];   
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - s.getY())][s.getX()] = temp;   //update sprite location to be one y level higher
+            grid[(size - s.getY())][s.getX()] = new Dot((size - 1 - s.getY()), s.getX());   //update sprite location to be one y level higher
         }
         if (direction.equalsIgnoreCase("a")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - 1 - s.getY())][s.getX() + 1] = temp;   //update sprite location to be one x level lower
+            grid[(size - 1 - s.getY())][s.getX() + 1] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one x level lower
         }
         if (direction.equalsIgnoreCase("s")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - 2 - s.getY())][s.getX()] = temp;   ////update sprite location to be one y level lower
+            grid[(size - 2 - s.getY())][s.getX()] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one y level lower
         }
         if (direction.equalsIgnoreCase("d")) {
             temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
-            grid[(size - 1 - s.getY())][s.getX() - 1] = temp;   //update sprite location to be one x level higher
+            grid[(size - 1 - s.getY())][s.getX() - 1] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one x level higher
         }
     }
 
@@ -64,6 +64,8 @@ public class Grid{
                 }
                 if (sprite instanceof Trophy) {
                     System.out.println("π");
+                } else if (sprite instanceof Treasure) {
+                    System.out.println("$");
                 }
             }
             System.out.println();
@@ -73,8 +75,8 @@ public class Grid{
     public void gameover(){ //use this method to display a loss
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
-                if (sprite instanceof Dot) {
-                    System.out.print("#");
+                if (sprite instanceof Sprite) {
+                    System.out.print("X");
                 }
                 if (sprite instanceof Player) {
                     System.out.print("O");
@@ -82,9 +84,22 @@ public class Grid{
             }
             System.out.println();
         }
+        System.out.println("You Lose!");
     }
 
     public void win(){ //use this method to display a win 
+        for (Sprite[] sprites : grid) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Sprite) {
+                    System.out.print("$");
+                }
+                if (sprite instanceof Player) {
+                    System.out.print("O");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("You Win!");
     }
 
 
