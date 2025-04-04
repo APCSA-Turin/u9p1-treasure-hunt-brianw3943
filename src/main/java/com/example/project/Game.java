@@ -41,11 +41,30 @@ public class Game{
                 e.printStackTrace();
             }
             clearScreen(); // Clear the screen at the beggining of the while loop
-
-     
+            grid.display();
+            System.out.println("Treasure count: " + player.getTreasureCount());
+            System.out.println("Lives: " + player.getLives());
+            while(1 != 0) {
+                Scanner scan = new Scanner(System.in);
+                String input = scan.nextLine();
+                if (player.isValid(size, input)) {
+                    player.interact(size, input, 2, enemies[0]);
+                    player.move(input);
+                    grid.placeSprite(player, input);
+                    grid.display();
+                    if (player.getLives() <= 0) {
+                        grid.gameover();
+                    }
+                    if (player.getTreasureCount() == 2) {
+                        grid.win();
+                    }
+                    System.out.println("Treasure count: " + player.getTreasureCount());
+                    System.out.println("Lives: " + player.getLives());
+                } else {
+                    System.out.println("Out of bounds");
+                }
             }
-            
-     
+        }
     }
 
     public void initialize(){
@@ -65,29 +84,7 @@ public class Game{
         grid.placeSprite(treasures[0]);
         grid.placeSprite(treasures[1]);
         grid.placeSprite(trophy);
-        grid.display();
-        System.out.println("Treasure count: " + player.getTreasureCount());
-        System.out.println("Lives: " + player.getLives());
-        while(1 != 0) {
-            Scanner scan = new Scanner(System.in);
-            String input = scan.nextLine();
-            if (player.isValid(size, input)) {
-                player.interact(size, input, 2, enemies[0]);
-                player.move(input);
-                grid.placeSprite(player, input);
-                grid.display();
-                if (player.getLives() <= 0) {
-                    grid.gameover();
-                }
-                if (player.getTreasureCount() == 2) {
-                    grid.win();
-                }
-                System.out.println("Treasure count: " + player.getTreasureCount());
-                System.out.println("Lives: " + player.getLives());
-            } else {
-                System.out.println("Out of bounds");
-            }
-        }
+        
         //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
     }
 
