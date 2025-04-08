@@ -32,11 +32,12 @@ public class Game{
 
     public void play(){ //write your game logic here
         Scanner scanner = new Scanner(System.in);
+        boolean win = false;
+        boolean lose = false;
 
-
-        while(true){
+        while(win == false && lose == false){
             try {
-                Thread.sleep(1000); // Wait for 1/10 seconds
+                Thread.sleep(100); // Wait for 1/10 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,8 +45,7 @@ public class Game{
             grid.display();
             System.out.println("Treasure count: " + player.getTreasureCount());
             System.out.println("Lives: " + player.getLives());
-            Scanner scan = new Scanner(System.in);
-            String input = scan.nextLine();
+            String input = scanner.nextLine();
             if (player.isValid(size, input)) {
                 player.interact(size, input, 2, treasures[0]);
                 player.move(input);
@@ -53,19 +53,21 @@ public class Game{
                 if (player.getLives() <= 0) {
                     clearScreen();
                     grid.gameover();
-                    scan.close();
+                    lose = true;
+                    scanner.close();
                     return;
                 }
                 if (player.getTreasureCount() == 2) {
                     clearScreen();
                     grid.win();
-                    scan.close();
+                    win = true;
+                    scanner.close();
                     return;
                 }
             } else {
-                System.out.println("Out of bounds");
             }
         }
+        scanner.close();
     }
 
     public void initialize(){

@@ -18,7 +18,7 @@ public class Grid{
 
  
     public Sprite[][] getGrid(){return grid;}
-
+    
 
 
     public void placeSprite(Sprite s){ //place sprite in new spot
