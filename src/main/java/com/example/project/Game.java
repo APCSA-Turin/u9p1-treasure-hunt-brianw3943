@@ -36,7 +36,7 @@ public class Game{
 
         while(true){
             try {
-                Thread.sleep(100); // Wait for 1/10 seconds
+                Thread.sleep(1000); // Wait for 1/10 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,25 +44,26 @@ public class Game{
             grid.display();
             System.out.println("Treasure count: " + player.getTreasureCount());
             System.out.println("Lives: " + player.getLives());
-            while(1 != 0) {
-                Scanner scan = new Scanner(System.in);
-                String input = scan.nextLine();
-                if (player.isValid(size, input)) {
-                    player.interact(size, input, 2, enemies[0]);
-                    player.move(input);
-                    grid.placeSprite(player, input);
-                    grid.display();
-                    if (player.getLives() <= 0) {
-                        grid.gameover();
-                    }
-                    if (player.getTreasureCount() == 2) {
-                        grid.win();
-                    }
-                    System.out.println("Treasure count: " + player.getTreasureCount());
-                    System.out.println("Lives: " + player.getLives());
-                } else {
-                    System.out.println("Out of bounds");
+            Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine();
+            if (player.isValid(size, input)) {
+                player.interact(size, input, 2, treasures[0]);
+                player.move(input);
+                grid.placeSprite(player, input);
+                if (player.getLives() <= 0) {
+                    clearScreen();
+                    grid.gameover();
+                    scan.close();
+                    return;
                 }
+                if (player.getTreasureCount() == 2) {
+                    clearScreen();
+                    grid.win();
+                    scan.close();
+                    return;
+                }
+            } else {
+                System.out.println("Out of bounds");
             }
         }
     }
@@ -89,6 +90,7 @@ public class Game{
     }
 
     public static void main(String[] args) {
-        
+        Game game = new Game(10);
+        game.play();
     }
 }

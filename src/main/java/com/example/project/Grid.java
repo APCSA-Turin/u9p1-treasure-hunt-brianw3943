@@ -90,9 +90,6 @@ public class Grid{
                 if (sprite instanceof Sprite) {
                     System.out.print("🌈");
                 }
-                if (sprite instanceof Player) {
-                    System.out.print("🦄");
-                }
             }
             System.out.println();
         }
