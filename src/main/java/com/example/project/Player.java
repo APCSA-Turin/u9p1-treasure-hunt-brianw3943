@@ -29,16 +29,16 @@ public class Player extends Sprite {
     //move method should override parent class, sprite
     public void move(String direction) { //move the (x,y) coordinates of the player
         if (direction.equalsIgnoreCase("a")) {
-            setX(getX() - 1);
+            setX(getX() - 1);   //if direction is right, decrease x value by 1
         }
         if (direction.equalsIgnoreCase("d")) {
-            setX(getX() + 1);
+            setX(getX() + 1);   //if direction is left, increase x value by 1
         }
         if (direction.equalsIgnoreCase("w")) {
-            setY(getY() + 1);
+            setY(getY() + 1);   //if direction is up, increase y value by 1
         }
         if (direction.equalsIgnoreCase("s")) {
-            setY(getY() - 1);
+            setY(getY() - 1);   //if direction is down, decrease y value by 1
         }
     }
 

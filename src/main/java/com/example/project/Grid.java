@@ -8,10 +8,10 @@ public class Grid{
 
     public Grid(int size) { //initialize and create a grid with all DOT objects
         this.size = size;
-        grid = new Sprite[size][size];
+        grid = new Sprite[size][size];          //grid is initialized with size amount of sprites
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                grid[i][j] = new Dot(size - i, j);
+                grid[i][j] = new Dot(size - i, j);          //every sprite in grid is turned into Dot objects
             }
         }
     }
@@ -19,6 +19,9 @@ public class Grid{
  
     public Sprite[][] getGrid(){return grid;}
     
+    public Sprite getSpriteAt(int x, int y) {
+        return grid[(size - 1 - y)][x];
+    }
 
 
     public void placeSprite(Sprite s){ //place sprite in new spot
@@ -49,18 +52,18 @@ public class Grid{
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
                 if (sprite instanceof Dot) {
-                    System.out.print("⬜");
+                    System.out.print("⬜");          //prints all Dot sprites
                 }
                 if (sprite instanceof Player) {
-                    System.out.print("🦄");
+                    System.out.print("🦄");         //prints Player sprite
                 }
                 if (sprite instanceof Enemy) {
-                    System.out.print("🦂");
+                    System.out.print("🦂");         //prints all Enemy sprites
                 }
                 if (sprite instanceof Trophy) {
-                    System.out.print("🏆");
+                    System.out.print("🏆");         //prints Trophy sprite
                 } else if (sprite instanceof Treasure) {
-                    System.out.print("🌈");
+                    System.out.print("🌈");         //prints all Treasure sprites
                 }
             }
             System.out.println();
@@ -71,7 +74,7 @@ public class Grid{
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
                 if (sprite instanceof Sprite) {
-                    System.out.print("💀");
+                    System.out.print("💀");         //entire grid is displayed as a lose indicator
                 }
             }
             System.out.println();
@@ -83,7 +86,7 @@ public class Grid{
         for (Sprite[] sprites : grid) {
             for (Sprite sprite : sprites) {
                 if (sprite instanceof Sprite) {
-                    System.out.print("🌈");
+                    System.out.print("🌈");         //entire grid is displayed as treasures
                 }
             }
             System.out.println();

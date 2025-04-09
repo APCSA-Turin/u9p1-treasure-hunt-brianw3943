@@ -47,22 +47,30 @@ public class Game{
             System.out.println("Lives: " + player.getLives());
             String input = scanner.nextLine();
             if (player.isValid(size, input)) {
-                player.interact(size, input, 2, treasures[0]);
-                player.move(input);
-                grid.placeSprite(player, input);
-                if (player.getLives() <= 0) {
+                if (input.equalsIgnoreCase("w")) {
+                    player.interact(size, input, 2, grid.getSpriteAt(player.getX(), player.getY() + 1));        //interacts with the object directly in front of the player (up)
+                } else if (input.equalsIgnoreCase("a")) {
+                    player.interact(size, input, 2, grid.getSpriteAt(player.getX() - 1, player.getY()));        //interacts with the object directly in front of the player (right)
+                } else if (input.equalsIgnoreCase("s")) {
+                    player.interact(size, input, 2, grid.getSpriteAt(player.getX(), player.getY() - 1));        //interacts with the object directly in front of the player (down)
+                } else if (input.equalsIgnoreCase("d")) {
+                    player.interact(size, input, 2, grid.getSpriteAt(player.getX() + 1, player.getY()));        //interacts with the object directly in front of the player (left)
+                }
+                player.move(input);     //moves player based on entered direction
+                grid.placeSprite(player, input);    //places player on grid based on entered direction
+                if (player.getLives() <= 0) {       //lose condition
                     clearScreen();
-                    grid.gameover();
+                    grid.gameover();        //display lose screen
                     lose = true;
                     scanner.close();
-                    return;
+                    return;         //end program
                 }
-                if (player.getTreasureCount() == 2) {
+                if (player.getWin()) {      //win condition
                     clearScreen();
-                    grid.win();
+                    grid.win();     //display win screen
                     win = true;
                     scanner.close();
-                    return;
+                    return;     //end program
                 }
             } else {
             }
@@ -71,9 +79,9 @@ public class Game{
     }
 
     public void initialize(){
-        size = 10;
+        size = 10;                          //initialize grid size
         grid = new Grid(size);
-        player = new Player(0, 0);
+        player = new Player(0, 0);      //initializes all sprites to a coordinate
         enemies = new Enemy[2];
         enemies[0] = new Enemy(4, 4);
         enemies[1] = new Enemy(8, 8);
@@ -81,7 +89,7 @@ public class Game{
         treasures[0] = new Treasure(5, 8);
         treasures[1] = new Treasure(7, 5);
         trophy = new Trophy(0, size - 1);
-        grid.placeSprite(player);
+        grid.placeSprite(player);           //place all sprites on grid
         grid.placeSprite(enemies[0]);
         grid.placeSprite(enemies[1]);
         grid.placeSprite(treasures[0]);
@@ -93,6 +101,5 @@ public class Game{
 
     public static void main(String[] args) {
         Game game = new Game(10);
-        game.play();
     }
 }
