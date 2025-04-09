@@ -26,24 +26,19 @@ public class Grid{
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-        Sprite temp;
         if (direction.equalsIgnoreCase("w")) {
-            temp = grid[(size - 1 - s.getY())][s.getX()];   
             grid[(size - 1 - s.getY())][s.getX()] = s;
             grid[(size - s.getY())][s.getX()] = new Dot((size - 1 - s.getY()), s.getX());   //update sprite location to be one y level higher
         }
         if (direction.equalsIgnoreCase("a")) {
-            temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
             grid[(size - 1 - s.getY())][s.getX() + 1] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one x level lower
         }
         if (direction.equalsIgnoreCase("s")) {
-            temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
             grid[(size - 2 - s.getY())][s.getX()] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one y level lower
         }
         if (direction.equalsIgnoreCase("d")) {
-            temp = grid[(size - 1 - s.getY())][s.getX()];
             grid[(size - 1 - s.getY())][s.getX()] = s;
             grid[(size - 1 - s.getY())][s.getX() - 1] = new Dot((size - 1 - s.getY()), s.getX());;   //update sprite location to be one x level higher
         }
